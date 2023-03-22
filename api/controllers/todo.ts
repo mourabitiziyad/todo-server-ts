@@ -4,10 +4,10 @@ import { Request, Response } from "express";
 const getTodos = async (req: Request, res: Response) => {
   try {
     const allTodos = await pool.query("SELECT * FROM todo");
-    res.json(allTodos.rows);
     if (allTodos.rows.length === 0) {
       res.status(404).json({ message: "No todos found" });
     }
+    res.json(allTodos.rows);
   } catch (err: unknown) {
     console.error(err);
     res.status(404).json({ message: "Something went wrong" });
